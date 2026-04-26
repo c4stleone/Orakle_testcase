@@ -14,32 +14,55 @@ contract MintCustomRevertTest is Test {
     }
 
     function test_RevertWhen_MintAmountIsZero_WithCustomErrorSelector4Bytes() public {
-        bytes4 expectedSelector = MintExample.MintAmountZero.selector;
+        // TODO: MintExample.________________.selector 로 교체하세요.
+        bytes4 expectedSelector = bytes4(0);
 
         vm.expectRevert(expectedSelector);
-        token.mint(0);
+
+        // TODO: revert가 발생하는 mint amount로 교체하세요.
+        token.mint(1);
     }
 
     function test_RevertWhen_MintAmountIsZero_WithFullRevertData() public {
-        vm.expectRevert(abi.encodeWithSelector(MintExample.MintAmountZero.selector));
-        token.mint(0);
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                // TODO: MintExample.________________.selector 로 교체하세요.
+                bytes4(0)
+            )
+        );
+
+        // TODO: revert가 발생하는 mint amount로 교체하세요.
+        token.mint(1);
     }
 
     function test_RevertWhen_MintAmountExceedsLimit_WithErrorArgument() public {
-        uint256 invalidAmount = token.MAX_MINT_PER_TX() + 1;
+        // TODO: token.MAX_MINT_PER_TX() + 1 로 교체하세요.
+        uint256 invalidAmount = 0;
 
-        vm.expectRevert(abi.encodeWithSelector(MintExample.InvalidMintAmount.selector, invalidAmount));
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                // TODO: MintExample.________________.selector 로 교체하세요.
+                bytes4(0),
+                invalidAmount
+            )
+        );
+
         token.mint(invalidAmount);
     }
 
     function test_MintIncreasesBalance() public {
-        token.mint(1);
+        // TODO: 성공하는 mint amount로 교체하세요.
+        token.mint(0);
 
-        assertEq(token.balanceOf(address(this)), 1);
+        // TODO: 기대 balance로 교체하세요.
+        assertEq(token.balanceOf(address(this)), 0);
     }
 
     function test_StringRevertVersion() public {
-        vm.expectRevert(bytes("Mint amount is zero"));
-        stringRevertToken.mint(0);
+        // TODO: 실제 revert string으로 교체하세요.
+        vm.expectRevert(bytes(""));
+
+        // TODO: revert가 발생하는 mint amount로 교체하세요.
+        stringRevertToken.mint(1);
     }
 }

@@ -28,6 +28,9 @@ jobs:
       - name: Show Forge version
         run: forge --version
 
+      - name: Use reference solution
+        run: cp solutions/MintCustomRevert.solution.t.sol test/MintCustomRevert.t.sol
+
       - name: Run Forge fmt
         run: forge fmt --check
 
